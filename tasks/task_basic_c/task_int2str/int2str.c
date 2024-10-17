@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "int2str.h"
 
-char* int2str(int number) {
+char* int2str(int num) {
     static char buf[12];
     int i = 0;
+    long long number = num;
     int nega = 0;
 
-    if (number == -2147483648) return "-2147483648"; // хз как это пофиксить
     if (number == 0) return "0";
     if (number < 0) {nega = 1; number = -number;}
 
