@@ -1,34 +1,34 @@
 #include "int2str.h"
 #include <stdlib.h>
-//работает на божьей силе
+
 char* int2str(const int number) {
-  int negative = 0, size = 0;
-  long long ext_number = number;
-  long long temp_number = number;
+  int size = 0;
+  unsigned int temp_number = number;
+  unsigned int ext_number;
 
-  if (ext_number < 0) {
-    ext_number = -ext_number;
+  if (number < 0) {
+    ext_number = -number;
     temp_number = -temp_number;
-    negative = 1;
     size++;
-  }
+    } else {
+      ext_number = number;
+    }
 
-  while (temp_number > 0) {
+  do {
     size++;
     temp_number /= 10;
-  }
+  } while (temp_number >0);
 
-  char* buf = malloc(size+1);
+  char* buf = malloc(size + 1);
   buf[size] = '\0';
 
-  if (ext_number == 0) {return "0";}
-  if (negative) {buf[0] = '-';}
-
-  for (int i = size - 1; i >= negative; i--) {
+  for (int i = size-1; i >= 0; i--) {
     buf[i] = (ext_number % 10) + '0';
     ext_number /= 10;
   }
 
+  if (number < 0) {
+    buf[0] = '-';
+  }
   return buf;
-
 }
